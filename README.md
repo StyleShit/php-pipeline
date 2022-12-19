@@ -25,7 +25,7 @@ class SecondPipe
 
 $pipeline = new Pipeline();
 
-$pipeline
+$result = $pipeline
     ->send('initial value')
     ->through([
         FirstPipe::class,
@@ -41,7 +41,7 @@ $pipeline
 You can also change the method to call for each pipe:
 
 ```PHP
-$pipeline
+$result = $pipeline
     ->send('initial value')
     ->through([
         FirstPipe::class,
