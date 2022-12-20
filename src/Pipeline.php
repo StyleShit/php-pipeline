@@ -12,6 +12,11 @@ class Pipeline
 
     protected $pipes = [];
 
+    public static function make()
+    {
+        return new static();
+    }
+
     public function send($passable)
     {
         $this->passable = $passable;

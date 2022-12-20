@@ -23,9 +23,7 @@ class SecondPipe
     }
 }
 
-$pipeline = new Pipeline();
-
-$result = $pipeline
+$result = Pipeline::make()
     ->send('initial value')
     ->through([
         FirstPipe::class,
@@ -41,7 +39,7 @@ $result = $pipeline
 You can also change the method to call for each pipe:
 
 ```PHP
-$result = $pipeline
+$result = Pipeline::make()
     ->send('initial value')
     ->through([
         FirstPipe::class,
@@ -56,7 +54,7 @@ $result = $pipeline
 While using a class is the cleanest way to create a pipe, there are also other ways to do it:
 
 ```PHP
-$result = $pipeline
+$result = Pipeline::make()
     ->send(1)
     ->through([
         // Use a closure.
@@ -79,6 +77,8 @@ $result = $pipeline
 
 
 ## Available Methods:
+
+`Pipeline::make()` - Create a new instance of the pipeline.
 
 `Pipeline::send($passable)` - Set the initial value to be passed through the pipeline.
 

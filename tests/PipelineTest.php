@@ -7,11 +7,8 @@ use StyleShit\Pipeline\Pipeline;
 use StyleShit\Pipeline\Tests\Mocks\PipeMock;
 
 it('should run an empty pipeline', function () {
-    // Arrange.
-    $pipeline = new Pipeline();
-
     // Act.
-    $result = $pipeline
+    $result = Pipeline::make()
         ->send(1)
         ->then(function ($passable) {
             return $passable + 2;
@@ -22,11 +19,8 @@ it('should run an empty pipeline', function () {
 });
 
 it('should run a pipeline using a function', function () {
-    // Arrange.
-    $pipeline = new Pipeline();
-
     // Act.
-    $result = $pipeline
+    $result = Pipeline::make()
         ->send(1)
         ->through([
             function ($passable, $next) {
@@ -40,11 +34,8 @@ it('should run a pipeline using a function', function () {
 });
 
 it('should run a pipeline using a class instance', function () {
-    // Arrange.
-    $pipeline = new Pipeline();
-
     // Act.
-    $result = $pipeline
+    $result = Pipeline::make()
         ->send(1)
         ->through([
             new PipeMock(),
@@ -56,11 +47,8 @@ it('should run a pipeline using a class instance', function () {
 });
 
 it('should run a pipeline using a class instance via specific method', function () {
-    // Arrange.
-    $pipeline = new Pipeline();
-
     // Act.
-    $result = $pipeline
+    $result = Pipeline::make()
         ->send(1)
         ->through([
             new PipeMock(),
@@ -73,11 +61,8 @@ it('should run a pipeline using a class instance via specific method', function 
 });
 
 it('should run a pipeline using a class string', function () {
-    // Arrange.
-    $pipeline = new Pipeline();
-
     // Act.
-    $result = $pipeline
+    $result = Pipeline::make()
         ->send(1)
         ->through([
             PipeMock::class,
@@ -89,11 +74,8 @@ it('should run a pipeline using a class string', function () {
 });
 
 it('should run a pipeline using a class string via specific method', function () {
-    // Arrange.
-    $pipeline = new Pipeline();
-
     // Act.
-    $result = $pipeline
+    $result = Pipeline::make()
         ->send(1)
         ->through([
             PipeMock::class,
@@ -106,11 +88,8 @@ it('should run a pipeline using a class string via specific method', function ()
 });
 
 it('should run a pipeline using an array', function () {
-    // Arrange.
-    $pipeline = new Pipeline();
-
     // Act.
-    $result = $pipeline
+    $result = Pipeline::make()
         ->send(1)
         ->through([
             [PipeMock::class, 'handle'],
@@ -123,11 +102,8 @@ it('should run a pipeline using an array', function () {
 });
 
 it('should run a pipeline through multiple pipe types', function () {
-    // Arrange.
-    $pipeline = new Pipeline();
-
     // Act.
-    $result = $pipeline
+    $result = Pipeline::make()
         ->send(1)
         ->through([
             function ($passable, $next) {
@@ -146,11 +122,10 @@ it('should run a pipeline through multiple pipe types', function () {
 
 it('should run the pipes top-to-bottom', function () {
     // Arrange.
-    $pipeline = new Pipeline();
     $runs = [];
 
     // Act.
-    $pipeline
+    Pipeline::make()
         ->send(1)
         ->through([
             function ($passable, $next) use (&$runs) {
@@ -176,12 +151,9 @@ it('should run the pipes top-to-bottom', function () {
 });
 
 it('should throw when passing an invalid pipe', function () {
-    // Arrange.
-    $pipeline = new Pipeline();
-
     // Act & Assert.
-    expect(function () use ($pipeline) {
-        $pipeline
+    expect(function () {
+        Pipeline::make()
             ->send(1)
             ->through([
                 'non-existing-class',
