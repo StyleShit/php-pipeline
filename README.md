@@ -80,15 +80,15 @@ $result = $pipeline
 
 ## Available Methods:
 
-`Container::send($passable)` - Set the initial value to be passed through the pipeline.
+`Pipeline::send($passable)` - Set the initial value to be passed through the pipeline.
 
-`Container::through($pipes)` - Set the array of pipes to be called.
+`Pipeline::through($pipes)` - Set the array of pipes to be called.
 
-`Container::via($method)` - Set the method to call the for each class pipe.
+`Pipeline::via($method)` - Set the method to call the for each class pipe.
 
-`Container::then($destination)` - Set the final destination callback.
+`Pipeline::then($destination)` - Set the final destination callback.
 
-`Container::thenReturn()` - Return the final value without passing it through a destination function.
+`Pipeline::thenReturn()` - Return the final value without passing it through a destination function.
 
 
 ___
